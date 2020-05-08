@@ -77,11 +77,11 @@ ggplot(data = mpg) +
 # Aesthetic include thing like the size, the shape , or the color of you points.
 
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+  geom_point(mapping = aes(x = displ, y = hwy, color = year, size = year, shape = year))
 
 
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+    geom_point(mapping = aes(x = displ, y = hwy, size = class, color = class, shape = class))
 
 
 ggplot(data = mpg) +
@@ -100,4 +100,7 @@ ggplot(data = mpg) +
 # we can make all of the points in our plot blue.
 
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy),color = "red")
+  geom_point(mapping = aes(x = displ, y = hwy, color = displ < 5))
+
+
+mpg
