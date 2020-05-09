@@ -102,7 +102,8 @@ ggplot(data = mpg) +
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = displ < 5))
 
-
+# A useful way for categorical variables, is to split your plot into facets,
+# Subplots that each display one subset of the data.
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
   facet_wrap(~ class, nrow = 2)
