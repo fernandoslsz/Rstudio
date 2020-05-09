@@ -107,3 +107,11 @@ ggplot(data = mpg) +
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
   facet_wrap(~ class, nrow = 2)
+
+# To facet your plot on the combination of two variables, add facet_grid() to
+# your plot call. The first argument of facet_grid() is also a formula.
+# This time the formula should contain two variable names separated by a ~
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ cyl)
