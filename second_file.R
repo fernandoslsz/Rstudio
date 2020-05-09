@@ -115,3 +115,23 @@ ggplot(data = mpg) +
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
   facet_grid(drv ~ cyl)
+
+
+
+# Facet exercises
+# What happens if you facet on a continuous variable ?
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ cyl, nrow = 2)
+
+# 3 What plots does the following code make ?
+# What does. do ?
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~.)# Ele mostra a relação entre as 3 variáveis.
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(.~ cyl)
