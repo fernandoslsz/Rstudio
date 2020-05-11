@@ -100,7 +100,7 @@ ggplot(data = mpg) +
 # we can make all of the points in our plot blue.
 
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, color = displ < 5))
+  geom_point(mapping = aes(x = displ, y = hwy, color = hwy < 20))
 
 # A useful way for categorical variables, is to split your plot into facets,
 # Subplots that each display one subset of the data.
@@ -123,6 +123,10 @@ ggplot(data = mpg) +
 
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_wrap(~ cyl, ncol = 2)
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
   facet_wrap(~ cyl, nrow = 2)
 
 # 3 What plots does the following code make ?
@@ -135,3 +139,82 @@ ggplot(data = mpg) +
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy)) +
   facet_grid(.~ cyl)
+
+
+
+
+# Geometric Objects
+
+# A Geom is a geometrical object that a plot uses to represent data.
+# People often describe plots by the type of geom that the plot uses.
+# For example, bar charts use bar geoms, line charts use line geoms.
+# Boxplots use boxplot geoms, and so on. Scatterplots break the trend:
+# they use the point geom. As we see in the preceding plots, you can
+# use different geoms to plot the same data.
+# The plot on the left uses the point geom, and the plot on the right uses
+# the smooth  geom, a smooth line fitted to the data.
+# To change the geom in your plot, change the geom function that you add to 
+# ggplot(). For instance, to make the preceding plots
+
+
+# Left 
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+# Right
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+
+
+# Every geom function in ggplot2 takes a mapping argument. However, 
+# not every aesthetic works with every geom.
+# You could set the
+# shape of a point, but you couldn’t set the “shape” of a line. On the
+# other hand, you could set the linetype of a line. geom_smooth() will
+# draw a different line, with a different linetype, for each unique value
+# of the variable that you map to linetype:
+ggplot(data = mpg) +
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))
+
+# Here geom_smooth() separates the cars into three lines based on
+# their drv value, which describes a car’s drivetrain.
+# Here geom_smooth() separates the cars into three lines based on
+# their drv value, which describes a car’s drivetrain. One line describes
+# all of the points with a 4 value, one line describes all of the points
+# with an f value, and one line describes all of the points with an r
+# value. Here, 4 stands for four-wheel drive, f for front-wheel drive,
+# and r for rear-wheel drive.
+
+ggplot(data = mpg) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy, group = drv))
+
+
+# To display multiple geoms in the same plot, add multiple geom
+# functions to ggplot():
+
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth()
+
+# If you place mappings in a geom function, ggplot2 will treat them as
+# local mappings for the layer. It will use these mappings to extend or
+# overwrite the global mappings for that layer only. This makes it pos‐
+# sible to display different aesthetics in different layers:
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point(mapping = aes(color = class)) +
+  geom_smooth()
+
+
+# You can use the same idea to specify different data for each layer.
+# Here, our smooth line displays just a subset of the mpg dataset, the
+# subcompact cars.
+
+
+
+
+
