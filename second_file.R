@@ -268,6 +268,8 @@ ggplot(data = mpg) +
   geom_smooth(mapping = aes(x = displ, y = hwy))
 
 # plot 5 
+
+
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = drv)) +
   geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))
@@ -275,3 +277,32 @@ ggplot(data = mpg) +
 # Plot 6
 ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = drv))
+
+# Statistical Transformatiions
+
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
+
+
+# The algorithm used to calculate new values for a graph is called a
+# stat, short for statistical transformation.
+
+# You might want to override the default stat. In the following
+# code, I change the stat of geom_bar() from count (the default)
+# to identity. This lets me map the height of the bars to the raw
+# values of a y variable
+
+demo <- tribble(
+  ~a,    ~b,
+  "bar_1",20,
+  "bar_2",30,
+  "bar_3",40
+  
+)
+
+ggplot(data = demo) +
+  geom_bar(mapping = aes(x = a, y = b), stat = "identity")
+
+
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, y = ..prop.., group = 1))
